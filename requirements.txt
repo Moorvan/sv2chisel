@@ -1,0 +1,4 @@
+parse==1.19.0
+PyYAML==6.0
+svinst==0.1.8
+svmodule==1.2.0
