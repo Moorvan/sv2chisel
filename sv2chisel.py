@@ -1,3 +1,4 @@
+import argparse
 import sys
 from typing import *
 import svinst
@@ -129,9 +130,14 @@ def run(file, mod_name: str):
 
 
 def main():
-    file, mod_name = sys.argv[1], sys.argv[2]
+    parser = argparse.ArgumentParser()
+    parser.add_argument('file', help='Verilog file')
+    parser.add_argument('mod_name', help='Module name')
+    args = parser.parse_args()
+    file, mod_name = args.file, args.mod_name
     run(file, mod_name)
 
 
 if __name__ == '__main__':
-    run('examples/Counter.sv', 'Counter2')
+    main()
+    # run('examples/Counter.sv', 'Counter2')
