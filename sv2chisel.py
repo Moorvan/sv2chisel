@@ -1,4 +1,5 @@
 import argparse
+import os
 import sys
 from typing import *
 import svinst
@@ -122,10 +123,13 @@ def getFileFromTo(file: str, from_line, end_line: int) -> str:
         return ''.join(lines[from_line:end_line])
 
 
-def run(file, mod_name: str):
+def run(file, mod_name: str, target_dir: str = "."):
     gen = SV2Chisel(file)
     chisel = gen.chiselGen(mod_name)
-    with open(f'{mod_name}.scala', 'w') as f:
+    path = f'{target_dir}/{mod_name}.scala'
+    if not os.path.exists(target_dir):
+        os.makedirs(target_dir)
+    with open(path, 'w') as f:
         f.write(chisel)
 
 
@@ -139,5 +143,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
-    # run('examples/Counter.sv', 'Counter2')
+    # main()
+    run('examples/Counter.sv', 'Counter', "out")
